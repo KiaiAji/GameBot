@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .register-container {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px white;
+            width: 350px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, white);
+            z-index: -1;
+            animation: rotate 6s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .text p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .input-group input {
+            width: 327px;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: white;
+            box-shadow: 0 0 10px red;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            color: #0a0a0a;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: white;
+            box-shadow: 0 0 15px red;
+        }
+
+        .login-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .login-text a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .login-text a:hover {
+            color: red;
+            text-shadow: 0 0 5px white;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: red;
+            text-shadow: 0 0 5px white;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="text">
+            <h1>Create Account</h1>
+        </div>
+        <form class="register-form" id="registerForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit" class="button">Register</button>
+        </form>
+        <p class="login-text">Already have an account? <a href="sign.html">Login here</a></p>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('message').textContent = "Passwords do not match!";
+                document.getElementById('message').style.color = "#FF0000";
+            } else if (username && email && password) {
+                document.getElementById('message').textContent = "Registration successful! Redirecting...";
+                document.getElementById('message').style.color = "#FF0000";
+                setTimeout(() => {
+                    window.location.href = "sign.html";
+                }, 2000);
+            } else {
+                document.getElementById('message').textContent = "Please fill in all fields!";
+                document.getElementById('message').style.color = "#ff00ff";
+            }
+        });
+    </script>
+</body>
+</html>
